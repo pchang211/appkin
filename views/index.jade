@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h1 #{pageTitle}
+	p Welcome to the Appkin
+
+	h2 Add User
+	#addUser
+		fieldset
+			input#inputUserName(type='text', placeholder='Username')
+			input#inputUserEmail(type='text', placeholder='Email')
+			button#btnAddUser Add User
+			button#btnDelUser Delete User
+
