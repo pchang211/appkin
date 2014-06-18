@@ -4,11 +4,20 @@ block content
 	h1 #{pageTitle}
 	p Welcome to the Appkin
 
-	h2 Add User
+	h2 Users
 	#addUser
 		fieldset
 			input#inputUserName(type='text', placeholder='Username')
 			input#inputUserEmail(type='text', placeholder='Email')
 			button#btnAddUser Add User
 			button#btnDelUser Delete User
+
+	h2 Events
+	#editEvent
+		fieldset
+			input#inputEventName(type='text', placeholder='Event name')
+			input#inputEventTime(type='integer', placeholder='Event time')
+			input#inputEventMin(type='integer', placeholder='Minimum attendees')
+		button#btnAddEvent Add Event
+		button#btnDelEvent Delete Event
 

@@ -19,6 +19,7 @@ router.post('/adduser', function(req, res) {
 	});
 });
 
+// DELETE users
 router.delete('/deleteuser/:user', function(req, res) {
 	var db = req.db;
 	db.collection('users').remove({'name': req.params.user}, function(err, result) {

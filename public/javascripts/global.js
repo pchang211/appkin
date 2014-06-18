@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('#btnAddUser').on('click', addUser);
 	$('#btnDelUser').on('click', deleteUser);
+	$('#btnAddEvent').on('click', addEvent);
 });
 
 function addUser(event) {
@@ -19,10 +20,11 @@ function addUser(event) {
 	}).done(function(response) {
 		if (response.msg === '') {
 			$('#addUser fieldset input').val('');
+			alert('User added');
 		}
 		else {alert('Error')}
 	});
-};
+}
 
 function deleteUser(event) {
 	event.preventDefault();
@@ -37,5 +39,27 @@ function deleteUser(event) {
 	}).done(function(response) {
 		alert('done');
 	});
-	
+}
+
+function addEvent(event) {
+	event.preventDefault();
+
+	var newEvent = {
+		'name': $('#editEvent fieldset input#inputEventName').val(),
+		'time': $('#editEvent fieldset input#inputEventTime').val(),
+		'min': $('#editEvent fieldset input#inputEventMin').val(),
+	};
+
+	$.ajax({
+		type: 'POST',
+		data: newEvent,
+		url: '/events/addevent',
+		dataType: 'JSON'
+	}).done(function(response) {
+		if (response.msg === '') {
+			$('#editEvent fieldset input').val('');
+			alert('Event added');
+		}
+		else {alert('Error')}
+	});
 }

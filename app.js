@@ -8,7 +8,7 @@ var logger = require('morgan');
 var mongoURI = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/appkin';
 var db = mongo.db(mongoURI, function (err, db) {
 	if (process.env.MONGOLAB_URI) {
-		db.collection('appkin', function(er, collection) {
+		db.collection('users', function(er, collection) {
 			collection.insert({'name': 'testname', 'email': 'testemail'}, {safe: true}, function(er, rs) {
 			});
 		});
@@ -17,6 +17,7 @@ var db = mongo.db(mongoURI, function (err, db) {
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var events = require('./routes/events')
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/events', events);
 
 var server = app.listen(process.env.PORT || 8080, function() {
 	console.log('Listening on port %d', server.address().port);
