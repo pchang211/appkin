@@ -4,20 +4,65 @@ block content
 	h1 #{pageTitle}
 	p Welcome to the Appkin
 
-	h2 Users
-	#addUser
-		fieldset
-			input#inputUserName(type='text', placeholder='Username')
-			input#inputUserEmail(type='text', placeholder='Email')
-			button#btnAddUser Add User
-			button#btnDelUser Delete User
+	- var bootstrapbtn = ['btn btn-default']
 
 	h2 Events
-	#editEvent
-		fieldset
-			input#inputEventName(type='text', placeholder='Event name')
-			input#inputEventTime(type='integer', placeholder='Event time')
-			input#inputEventMin(type='integer', placeholder='Minimum attendees')
-		button#btnAddEvent Add Event
-		button#btnDelEvent Delete Event
+	#wrapper
+		#eventList
+			table
+				thead
+					th Name
+					th Time
+					th Minimum
+				tbody
 
+		#eventInfo
+			h2 Event Info
+			p
+				strong Name:
+					<span id='eventInfoName'></span>
+				br
+				strong Time:
+					<span id='eventInfoTime'></span>
+				br
+				strong Minimum:
+					<span id='eventInfoMin'></span>
+				br
+				strong Users:
+					<span id='eventInfoUsers'</span>
+				br
+				input#usersField
+				button#attendBtn(class='btn btn-default').
+					Attend
+
+		h2 Users
+		#addUser
+			fieldset
+				input#inputUserName(type='text', placeholder='Username')
+				input#inputUserEmail(type='text', placeholder='Email')
+			button#btnAddUser(type='button', class='btn btn-default') Add User
+			button#btnDelUser(type='button', class='btn btn-default') Delete User
+
+		h2 Events
+		#editEvent
+			fieldset
+				input#inputEventName(type='text', placeholder='Event name')
+				input#inputEventTime(type='integer', placeholder='Event time')
+				input#inputEventMin(type='integer', placeholder='Minimum attendees')
+			button#btnAddEvent(type='button', class='btn btn-default') Add Event
+			button#btnDelEvent(type='button', class='btn btn-default') Delete Event
+
+		//-
+			h2 Autocomplete
+
+			input(type='text', id='search-input')
+			script.
+				$('#search-input').autocomplete({
+					source: ['aaaaaaa', 'bbbbbbbbbb', 'cccccccc']
+				});
+
+			h2 messing around with jquery menus
+			select
+				option User1
+				option User2
+				option User3
