@@ -1,25 +1,54 @@
+var current_event;
+
+// var current_id;
+
 $(document).ready(function() {
 	populateEventList();
 	$('#btnAddUser').on('click', addUser);
 	$('#btnDelUser').on('click', deleteUser);
 	$('#btnAddEvent').on('click', addEvent);
 	$('#btnDelEvent').on('click', deleteEvent);
-	$('#attendBtn').on('click', dummy);
-
-	$('#eventList').on('click', 'td a.attendbtn', dummy);
+	$('#attendBtn').on('click', attendEvent);
 
 	$('#eventList').on('click', 'td a.linkshowevent', showEvent);
+	// $('#eventList').on('click', 'td a.attendbtn', attendEvent);
+
 });
+
+function attendEvent(event) {
+	event.preventDefault();
+	console.log(current_event);
+	var username = $('#usersField').val();
+
+	// if (!current_event.users) {
+	// 	current_event.users = [username];
+	// }
+	// else {
+	// 	current_event.users.push(username);
+	// }
+
+	$.ajax({
+		type: 'PUT',
+		data: current_event,
+		url: '/events/updateevent/' + username,
+		dataType: 'JSON'
+	}).done(function(response) {
+		console.log(response);
+	});
+
+	// I think I should probably pass
+}
 
 function showEvent(e) {
 	e.preventDefault();
-	var event;
+	current_id = $(this).attr('rel');
 	$.getJSON('/events/' + $(this).attr('rel'), function(data) {
-		event = data;
 		$('#eventInfoName').text(data.name);
 		$('#eventInfoTime').text(data.time);
 		$('#eventInfoMin').text(data.min);
-		console.log(event);
+		$('#eventInfoUsers').text(data.users);
+		console.log(data);
+		current_event = data;
 	});
 	
 	var users = [];
